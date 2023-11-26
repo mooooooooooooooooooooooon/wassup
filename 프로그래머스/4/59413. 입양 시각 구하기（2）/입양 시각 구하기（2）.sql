@@ -1,0 +1,16 @@
+WITH RECURSIVE HOURS AS (           # 재귀함수 for문이랑 비슷 with recursive
+    SELECT 0 AS NUM                 # 0을 num으로 지정해서 num이 23이 될때까지 1씩 증가 시켜서 hours 테이블에 넣음
+    UNION ALL
+    SELECT NUM+1 FROM HOURS
+    WHERE NUM < 23
+)
+
+SELECT
+    HOURS.NUM AS HOUR,
+    COUNT(AO.ANIMAL_ID) AS COUNT
+FROM
+    ANIMAL_OUTS AS AO
+RIGHT JOIN
+    HOURS ON EXTRACT(HOUR FROM AO.DATETIME) = HOURS.NUM
+GROUP BY HOURS.NUM
+ORDER BY HOUR

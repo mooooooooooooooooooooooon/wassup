@@ -1,12 +1,12 @@
 -- 코드를 입력하세요
 SELECT
-    sales_date,
+    date_format(sales_date, '%Y-%m-%d') as sales_date,
     product_id,
     user_id,
     sales_amount
 from(
 SELECT
-    date_format(sales_date, '%Y-%m-%d') as sales_date,
+    sales_date,
     product_id,
     user_id,
     sales_amount
@@ -14,10 +14,10 @@ from
     online_sale 
 union all
 SELECT
-        date_format(sales_date, '%Y-%m-%d') as sales_date,
-        product_id,
-        Null as user_id,
-        sales_amount
+     sales_date,
+    product_id,
+    Null as user_id,
+    sales_amount
     from
         offline_sale
     where
